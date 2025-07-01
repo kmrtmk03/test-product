@@ -1,6 +1,8 @@
 import styles from './App.module.sass'
+import Card from '../Card/Card.tsx';
+import type { CardData } from '../Card/Card.tsx';
 
-const cardData = [
+const cardData: CardData[] = [
   {
     id: 1,
     user: { name: 'Allison Hill', email: 'allison.hill57@example.com', avatar: 'https://i.pravatar.cc/40?u=1' },
@@ -61,32 +63,13 @@ const cardData = [
     flagged: true,
     color: 'yellow'
   },
-];
+]
 
 function App() {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.inner}>
-        {cardData.map(card => (
-          <div key={card.id} className={`${styles.card} ${styles[`card--${card.color}`]}`}>
-            <div className={styles.cardHeader}>
-              <img src={card.user.avatar} alt={card.user.name} className={styles.cardAvatar} />
-              <div className={styles.cardUserInfo}>
-                <div className={styles.cardUserName}>{card.user.name}</div>
-                <div className={styles.cardUserEmail}>{card.user.email}</div>
-              </div>
-            </div>
-            <div className={styles.cardBody}>
-              <h2 className={styles.cardTitle}>{card.title}</h2>
-              <p className={styles.cardDescription}>{card.description}</p>
-            </div>
-            <div className={styles.cardFooter}>
-              {card.attachment && <span className={styles.cardAttachment}>📎</span>}
-              <span className={styles.cardTimestamp}>{card.timestamp}</span>
-              {card.flagged && <span className={styles.cardFlag}>🚩</span>}
-            </div>
-          </div>
-        ))}
+        {cardData.map(card => <Card key={card.id} card={card} />)}
       </div>
     </div>
   )
