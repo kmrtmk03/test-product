@@ -1,75 +1,14 @@
 import styles from './App.module.sass'
-import Card from '../Card/Card.tsx';
-import type { CardData } from '../Card/Card.tsx';
+import OscClient from '../OscClient/OscClient.tsx';
 
-const cardData: CardData[] = [
-  {
-    id: 1,
-    user: { name: 'Allison Hill', email: 'allison.hill57@example.com', avatar: 'https://i.pravatar.cc/40?u=1' },
-    title: 'Event Photos',
-    description: 'Innovate customized ecologies best-of-breed mashups turn-key exploit cultivate transition create enable exploit, convergence revolutionary.',
-    timestamp: '15m ago',
-    attachment: true,
-    flagged: false,
-    color: 'blue'
-  },
-  {
-    id: 2,
-    user: { name: 'Scott Lane', email: 'scott.lane40@example.com', avatar: 'https://i.pravatar.cc/40?u=2' },
-    title: '→ Project Brief',
-    description: 'Rich aggregate deploy deploy integrate AJAX-enabled value-added global: blogging wikis web-readiness, vortals cross-platform maximize.',
-    timestamp: 'Yesterday',
-    attachment: false,
-    flagged: true,
-    color: 'red'
-  },
-  {
-    id: 3,
-    user: { name: 'Jayden Sullivan', email: 'jayden.sullivan@example.com', avatar: 'https://i.pravatar.cc/40?u=3' },
-    title: 'Design Approval',
-    description: 'View Conversation',
-    timestamp: '2h ago',
-    attachment: false,
-    flagged: false,
-    color: 'green'
-  },
-  {
-    id: 4,
-    user: { name: 'Marian Hawkins', email: 'marian.hawkins58@example.com', avatar: 'https://i.pravatar.cc/40?u=4' },
-    title: 'Invitation',
-    description: 'Blogospheres redefine disintermediate relationships supply-chains models engineer world-class grow vortals seize utilize productize engage.',
-    timestamp: '07.07.14',
-    attachment: false,
-    flagged: false,
-    color: 'purple'
-  },
-  {
-    id: 5,
-    user: { name: 'Clinton Barnett', email: 'clinton.barnett59@example.com', avatar: 'https://i.pravatar.cc/40?u=5' },
-    title: '← Sales Report',
-    description: 'Capture user-centred ecologies enterprise expedite ecologies solutions back-end maximize mindshare impactful customized podcasts.',
-    timestamp: '07.07.14',
-    attachment: true,
-    flagged: false,
-    color: 'orange'
-  },
-  {
-    id: 6,
-    user: { name: 'Alma Harrison', email: 'alma.harrison36@example.com', avatar: 'https://i.pravatar.cc/40?u=6' },
-    title: '← Weekend',
-    description: 'Transform communities models implement blogging streamline harness repurpose viral cultivate. Grow compelling visualize cultivate applications.',
-    timestamp: '06.07.14',
-    attachment: false,
-    flagged: true,
-    color: 'yellow'
-  },
-]
+const serverIp: string = "192.168.1.17";
+
 
 function App() {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.inner}>
-        {cardData.map(card => <Card key={card.id} card={card} />)}
+        <OscClient webSocketUrl={`wss://${serverIp}:8081`} />
       </div>
     </div>
   )

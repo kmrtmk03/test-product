@@ -36,8 +36,8 @@ export default defineConfig({
     host: true,
     port: 5555,
     https: {
-      key: './.cert/192.168.11.8-key.pem',
-      cert: './.cert/192.168.11.8.pem'
+      key: './.cert/192.168.1.17-key.pem',
+      cert: './.cert/192.168.1.17.pem'
     }
   }
 })
