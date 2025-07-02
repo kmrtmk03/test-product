@@ -16,14 +16,14 @@ const server = https.createServer({
 // ===== WSS (WebSocket over HTTPS) =====
 const wss = new WebSocketServer({ server });
 server.listen(8081, "0.0.0.0", () => {
-  console.log("WSS server running on wss://192.168.1.17:8081");
+  console.log("WSS server running on wss://192.168.11.8:8081");
 });
 
 // ===== OSC (UDP) ポート =====
 const udpPort = new osc.UDPPort({
   localAddress: "0.0.0.0",
   localPort: 57121,       // 受信用
-  remoteAddress: "192.168.1.17",
+  remoteAddress: "192.168.11.8",
   remotePort: 57121,      // 送信先 (SuperCollider など)
   metadata: true,         // 型情報付き
 });

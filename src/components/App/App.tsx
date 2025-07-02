@@ -1,7 +1,7 @@
 import styles from './App.module.sass'
 import OscClient from '../OscClient/OscClient.tsx';
 
-const serverIp: string = "192.168.1.17";
+const serverIp: string = "192.168.11.8";
 
 
 function App() {
