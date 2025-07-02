@@ -6,8 +6,8 @@ import osc from "osc";
 
 // ===== HTTPS サーバー =====
 const server = https.createServer({
-  cert: fs.readFileSync("./cert.pem"),
-  key: fs.readFileSync("./key.pem"),
+  cert: fs.readFileSync("../certs/cert.pem"),
+  key: fs.readFileSync("../certs/key.pem"),
 }, (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end("WSS server is running\n");
