@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vitejs.dev/config/
+// 自分のローカルIPを指定（例: 192.168.1.17）
+const localIp = '192.168.1.17';
+
 export default defineConfig({
   plugins: [
     react(),
@@ -38,6 +40,11 @@ export default defineConfig({
     https: {
       key: './certs/key.pem',
       cert: './certs/cert.pem'
+    },
+    hmr: {
+      protocol: 'wss',
+      host: localIp,       // ← ローカルIPを指定
+      port: 5555,
     }
   }
 })
