@@ -23,8 +23,8 @@ server.listen(8081, "0.0.0.0", () => {
 const udpPort = new osc.UDPPort({
   localAddress: "0.0.0.0",
   localPort: 57121,       // 受信用
-  remoteAddress: "127.0.0.1",
-  remotePort: 57120,      // 送信先 (SuperCollider など)
+  remoteAddress: "192.168.1.17",
+  remotePort: 57121,      // 送信先 (SuperCollider など)
   metadata: true,         // 型情報付き
 });
 udpPort.open();
@@ -43,10 +43,29 @@ wss.on("connection", (ws) => {
 });
 
 // ----- OSC → WSS -----
+// この部分をデバッグ用のコードに置き換えてみてください
 udpPort.on("message", (oscMsg) => {
+  console.log(`[サーバーログ 1] OSCメッセージ受信:`, oscMsg);
+
   const json = JSON.stringify(oscMsg);
+
+  // 接続中のクライアント数をチェック
+  console.log(`[サーバーログ 2] 現在のWebSocketクライアント数: ${wss.clients.size}`);
+
+  if (wss.clients.size === 0) {
+    console.log("[サーバーログ !] 送信先クライアントがいないため、処理を中断します。");
+    return; // この行が重要です
+  }
+
   wss.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) client.send(json);
+    // 各クライアントの接続状態をチェック
+    if (client.readyState === WebSocket.OPEN) { 
+      console.log(`[サーバーログ 3] クライアントへWebSocketメッセージを送信します...`);
+      client.send(json);
+      console.log('[サーバーログ 4] 送信完了:', json);
+    } else {
+      console.log(`[サーバーログ !] 接続がOPENではないクライアントがいたため、送信をスキップしました。 readyState: ${client.readyState}`);
+    }
   });
 });
 
